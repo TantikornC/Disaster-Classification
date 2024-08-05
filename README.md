@@ -34,7 +34,7 @@ The EDA phase involved a comprehensive analysis of the dataset to uncover patter
 **Word Cloud Visualizations:**  
 - **Keywords:** A word cloud was generated from the `keyword` column to identify the most common keywords associated with disaster-related tweets. This visualization highlighted terms such as "earthquake", "fire", and "flood", which frequently appeared in disaster contexts. The word cloud visually emphasized the prevalence and importance of these keywords.
   
-  ![Word Cloud for Keywords](./images/wordcloud_keywords.png)
+  ![Word Cloud for Keywords](./assets/images/wordcloud_keywords.png)
 
 - **Locations:** Another word cloud was created from the `location` column, showcasing the geographical areas most mentioned in disaster-related tweets. Locations like "California", "Texas", and "New York" were prominently featured, indicating areas frequently impacted by the reported events.
 
