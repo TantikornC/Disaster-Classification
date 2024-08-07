@@ -32,17 +32,29 @@ After: "deeds reason earthquake may allah forgive us"
 The EDA phase involved a comprehensive analysis of the dataset to uncover patterns and insights that would inform the feature engineering and modeling stages. Key visualizations and analyses included:
 
 **Word Cloud Visualizations:**  
-- **Keywords:** A word cloud was generated from the `keyword` column to identify the most common keywords associated with disaster-related tweets. This visualization highlighted terms such as "earthquake", "fire", and "flood", which frequently appeared in disaster contexts. The word cloud visually emphasized the prevalence and importance of these keywords.
+- **Keywords:** A word cloud was generated from the `keyword` column to identify the most common keywords associated with disaster-related tweets. This visualization highlighted terms such as "hostage," "derailment," "flood," "forest fire," and "typhoon." The size of each word in the cloud represents its frequency, with larger words indicating more common keywords in the dataset. This visualization emphasized the variety and prevalence of different disaster types discussed in the tweets, providing a visual representation of the critical themes identified during data exploration.
   
-  ![Word Cloud for Keywords](./assets/images/wordcloud_keywords.png)
+<p align="center">
+  <img src="./assets/images/wordcloud_keywords.png" alt="Word Cloud for Keywords"/>
+</p>
 
 - **Locations:** Another word cloud was created from the `location` column, showcasing the geographical areas most mentioned in disaster-related tweets. Locations like "California", "Texas", and "New York" were prominently featured, indicating areas frequently impacted by the reported events.
 
-  ![Word Cloud for Locations](./images/wordcloud_locations.png)
+  Key observations from the location word cloud:
+  - **Prominent Locations**: The most frequently mentioned locations include "USA," "New York," "Canada," "UK," and "Nigeria," indicating high tweet activity related to disasters in these areas.
+  - **Global Coverage**: The word cloud shows a wide geographic spread, including locations from various continents such as "Australia," "India," "London," and "California."
+  - **Significant Cities and Countries**: Both country names (e.g., "USA," "Canada") and city names (e.g., "New York," "London") appear frequently, highlighting the urban centers often discussed in the context of disasters.
+  - **Diverse Mention**: The locations range from specific cities and states to broader regions and countries, reflecting the diverse scope of the dataset in terms of geographic mentions.
+
+<p align="center">
+  <img src="./assets/images/wordcloud_locations.png" alt="Word Cloud for Locations"/>
+</p>
 
 - **Text Content:** A word cloud for the `text` field of disaster-related tweets provided a broad view of the common terms and phrases used in these tweets. This helped in understanding the context and sentiment expressed by users during disaster events.
 
-  ![Word Cloud for Texts](./images/wordcloud_texts.png)
+<p align="center">
+  <img src="./assets/images/wordcloud_texts.png" alt="Word Cloud for Texts"/>
+</p>
 
 **Keyword Distribution by Target:**  
 - A bar chart was created to display the distribution of keywords, differentiated by the `target` label (1 for disaster-related and 0 for non-disaster-related tweets). This chart provided insights into which keywords were most strongly associated with disaster-related content. For example, keywords like "earthquake", "storm", and "evacuation" had higher frequencies in the disaster-related category, aiding in understanding the significance of specific terms.
