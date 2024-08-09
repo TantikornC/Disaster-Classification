@@ -50,16 +50,24 @@ The EDA phase involved a comprehensive analysis of the dataset to uncover patter
   <img src="./assets/images/wordcloud_locations.png" alt="Word Cloud for Locations"/>
 </p>
 
-- **Text Content:** A word cloud for the `text` field of disaster-related tweets provided a broad view of the common terms and phrases used in these tweets. This helped in understanding the context and sentiment expressed by users during disaster events.
+- **Text:** A word cloud was created from the `text` column to analyze the most frequently occurring words in disaster-related tweets. Interestingly, the most prominent term is "t.co," which appears frequently due to the inclusion of links in tweets. Other significant words include "fire," "people," "suicide," "flood," "police," and "killed," reflecting the critical themes discussed in the dataset. The presence of terms like "Hiroshima," "storm," and "crash" highlights specific disasters and incidents that were heavily discussed. Additionally, words like "via," "amp," and "new" show up frequently, possibly indicating common tweet structures and phrasing.
 
 <p align="center">
   <img src="./assets/images/wordcloud_texts.png" alt="Word Cloud for Texts"/>
 </p>
 
 **Keyword Distribution by Target:**  
-- A bar chart was created to display the distribution of keywords, differentiated by the `target` label (1 for disaster-related and 0 for non-disaster-related tweets). This chart provided insights into which keywords were most strongly associated with disaster-related content. For example, keywords like "earthquake", "storm", and "evacuation" had higher frequencies in the disaster-related category, aiding in understanding the significance of specific terms.
+- **Top 10 Keywords**: The top 10 keywords predominantly associated with disaster-related tweets (Target == 1) include "derailment," "wreckage," "outbreak," "debris," and "oil spill." These terms highlight the most frequently discussed disaster events in the dataset, with a strong focus on incidents involving significant damage or threat.
 
-  ![Keyword Distribution](./images/keyword_distribution.png)
+<p align="center">
+  <img src="./assets/images/keyword_distribution_by_target_top10.png" alt="Keyword Distribution - Top 10"/>
+</p>
+
+- **Least 10 Keywords**: The least mentioned keywords in disaster-related tweets (Target == 1) include "blew up," "threat," "screaming," and "electrocute." These terms, while still relevant to disaster contexts, appear far less frequently in the dataset, indicating they are less commonly associated with major disaster events compared to the top keywords.
+
+<p align="center">
+  <img src="./assets/images/keyword_distribution_by_target_least10.png" alt="Keyword Distribution - Least 10"/>
+</p>
 
 **Correlation of Links and Target:**  
 - The presence of URLs in tweets (`has_urls`) was analyzed to determine its correlation with the `target` variable. A bar plot showed that tweets containing URLs were less likely to be classified as disaster-related, suggesting that many informative or news-related tweets might not directly address disaster specifics.
