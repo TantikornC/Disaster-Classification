@@ -63,13 +63,14 @@ The EDA phase involved a comprehensive analysis of the dataset to uncover patter
 
 - **Text:** A word cloud was created from the `text` column to analyze the most frequently occurring words in disaster-related tweets. Interestingly, the most prominent term is "t.co," which appears frequently due to the inclusion of links in tweets. Other significant words include "fire," "people," "suicide," "flood," "police," and "killed," reflecting the critical themes discussed in the dataset. The presence of terms like "Hiroshima," "storm," and "crash" highlights specific disasters and incidents that were heavily discussed. Additionally, words like "via," "amp," and "new" show up frequently, possibly indicating common tweet structures and phrasing.
 
+**Keyword Distribution by Target:** 
+
 <p align="center">
   <img src="./assets/images/keyword_distribution_by_target_top10.png" alt="Keyword Distribution - Top 10"/>
 </p>
 
 <p align="center"><strong>Keyword Distribution - Top 10</strong></p>
-
-**Keyword Distribution by Target:**  
+ 
 - **Top 10 Keywords:** The top 10 keywords predominantly associated with disaster-related tweets (Target == 1) include "derailment," "wreckage," "outbreak," "debris," and "oil spill." These terms highlight the most frequently discussed disaster events in the dataset, with a strong focus on incidents involving significant damage or threat.
 
 <p align="center">
@@ -107,7 +108,6 @@ These insights were instrumental in guiding the feature engineering process and 
 - Given the LSTM model’s ability to learn from raw text data, traditional text vectorization techniques like TF-IDF were not utilized. Instead, tweets were tokenized, and each word was embedded into dense vectors using an embedding layer within the neural network, allowing the model to learn the relationships between words in context.
 
 **Training and Validation:**  
-- The dataset was split into training and validation sets to ensure the model's generalizability. The LSTM model was trained with advanced techniques such as early stopping, which prevented overfitting by stopping the training process when the validation performance ceased improving. Additionally, model checkpointing was implemented to save the best-performing model, ensuring that the final model used for evaluation was the most effective one trained.
 
 <p align="center">
   <img src="./assets/images/model_accuracy.png" alt="Model Accuracy" width="45%"/>
@@ -117,50 +117,30 @@ These insights were instrumental in guiding the feature engineering process and 
 
 <p align="center"><strong>Model Accuracy and Model Loss</strong></p>
 
+- The dataset was split into training and validation sets to ensure the model's generalizability. The LSTM model was trained with advanced techniques such as early stopping, which prevented overfitting by stopping the training process when the validation performance ceased improving. Additionally, model checkpointing was implemented to save the best-performing model, ensuring that the final model used for evaluation was the most effective one trained.
+
 **Model Evaluation:**
 - The LSTM model was evaluated using several performance metrics, including accuracy, precision, recall, and F1-score. The model achieved an accuracy of 86%, indicating a strong ability to classify disaster-related tweets. However, the false negative rate of 17% suggested that there were challenges in identifying all disaster-related tweets, which could be a focus for further model enhancement, such as adjusting the network architecture or experimenting with different hyperparameters.
 
-### 4. Results & Insights
-
-**Key Results:**  
-- The LSTM model demonstrated strong performance with significant accuracy in distinguishing between disaster and non-disaster tweets. The presence of certain keywords and the inclusion of URLs were critical in improving the model's prediction capability.
-
-**Key Insights:**  
-- Tweets containing certain keywords like "earthquake", "flood", or "fire" were strong indicators of disaster-related content. The analysis also revealed that tweets with URLs were more likely to be associated with non-disaster content.
-
-### 5. Challenges & Limitations
+### 4. Challenges & Limitations
 
 **Challenges:**  
-- Difficulty in interpreting ambiguous tweets where the context could vary significantly.
-- High false negative rate, indicating a need for further refinement in capturing disaster-related nuances.
+- **Ambiguity in Disaster Tweets:** One of the significant challenges was dealing with tweets that contained language commonly used in disaster contexts but not actually referring to disasters. For instance, the word "fire" could refer to an actual event or simply be used metaphorically. To address this, the model incorporated contextual features and fine-tuned word embeddings.
+- **Handling Outliers:** Tweets with unusually long lengths or containing rare words posed challenges. These outliers were handled through pre-processing steps, including truncation to a maximum sequence length and applying text normalization techniques to reduce noise.
 
 **Limitations:**  
-- The model primarily relies on text data and may not accurately classify tweets with more complex contexts or those that use non-standard language, such as slang or emojis.
+- **Generalization to Other Datasets:** While the model performed well on the given dataset, its ability to generalize to other datasets, particularly those in different languages or cultural contexts, may be limited. Further testing on diverse datasets is necessary to confirm its robustness.
+- **Potential Biases:** The model may have developed biases based on the specific types of disasters or locations frequently mentioned in the training data. For example, if a particular type of disaster (like floods) was overrepresented, the model might be biased towards detecting floods more accurately than other types of disasters.
 
-### 6. Future Work
+### 5. Conclusion
 
-**Enhancements:**  
-- Incorporate more advanced NLP techniques like BERT to better understand the context and improve classification accuracy.
-- Expand the dataset with more diverse examples and potentially real-time data feeds from Twitter's API to improve the model's robustness.
-- Explore the integration of multimedia content analysis, including images and videos, to enhance the classification process.
+**Summary of Findings:**
+- The project demonstrated that machine learning models, when combined with effective feature engineering and evaluation techniques, can accurately classify disaster-related tweets. The insights gained from this classification can significantly aid in disaster response efforts.
 
-## Figures & Visualizations
+**Impact:**
+- This model has the potential to make a substantial impact on disaster management by providing timely, relevant information to authorities and the public, ultimately contributing to more effective and efficient disaster response and mitigation efforts.
 
-**Example Visualizations:**
-- **Keyword Distribution:** ![Keyword Distribution](./images/keyword_distribution.png)
-- **Word Cloud for Disaster-Related Keywords:** ![Word Cloud Keywords](./images/wordcloud_keywords.png)
-- **Text Length Distribution by Target:** ![Text Length Distribution](./images/text_length_distribution.png)
-
-## Contributors
-
-- [Your Name]
-- [Classmate 1]
-- [Classmate 2]
 
 ## Acknowledgements
 
 This project was part of the Data Scientist Practicum course at Chulalongkorn University. Special thanks to our instructors and peers for their guidance and support throughout the project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
