@@ -4,7 +4,7 @@ Welcome to my data science portfolio! Here, I showcase my projects and expertise
 
 # Disaster Tweet Classification
 
-A collaborative project focused on developing a machine learning model to classify tweets related to natural disasters. This project was undertaken as part of the Data Scientist Practicum course at Chulalongkorn University. The dataset used was sourced from Kaggle and included various pre-engineered features such as topic keywords and tweet locations.
+A collaborative project focused on developing a machine learning model to classify tweets related to natural disasters. This project was undertaken as part of the Data Scientist Practicum course at Chulalongkorn University. The dataset for this project was sourced from the [Kaggle "Natural Language Processing with Disaster Tweets" competition](https://www.kaggle.com/competitions/nlp-getting-started) and included various pre-engineered features such as topic keywords and tweet locations.
 
 ## Overview
 
@@ -21,7 +21,7 @@ The goal of this project was to leverage machine learning and natural language p
 - **Feature Engineering:** The following new features were created to enrich the dataset:
   - **cleaned_text:** This feature involved cleaning the original tweet text by removing non-text elements, converting to lowercase, and applying lemmatization for consistent text analysis.
   - **cleaned_keyword:** This feature standardized and corrected the keywords associated with each tweet to ensure uniformity in analysis.
-  - **has_urls:** A binary feature indicating the presence of URLs in the tweets, as URLs were observed to be a potential indicator of non-disaster content.
+  - **has_urls:** A binary feature indicating the presence of URLs in the tweets, as URLs were observed to be a potential indicator of disaster content.
 
 *Example of Data Cleaning:*  
 Before: "Our Deeds are the Reason of this #earthquake May allah forgive us all."  
