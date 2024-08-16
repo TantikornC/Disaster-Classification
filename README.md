@@ -17,15 +17,15 @@ The goal of this project was to leverage machine learning and natural language p
 **Data Source:** The dataset comprised 7,613 tweets, each labeled as either disaster or non-disaster. It included features like `text`, `keyword`, `location`, and `target`.
 
 **Data Cleaning & Preprocessing:**  
-- **Text Cleaning:** The process involved text extraction. Conversion to lowercase and tokenization were performed, followed by the removal of stop words and lemmatization.
-- **Feature Engineering:** The following new features were created to enrich the dataset:
+- **Text Cleaning:** The text data underwent a cleaning process that involved extracting the relevant text content, converting it to lowercase, and performing tokenization. Stop words were removed, and lemmatization was applied to standardize the text for analysis.
+- **Feature Engineering:** Several new features were engineered to enhance the dataset:
   - **cleaned_text:** This feature involved cleaning the original tweet text by removing non-text elements, converting to lowercase, and applying lemmatization for consistent text analysis.
-  - **cleaned_keyword:** This feature standardized and corrected the keywords associated with each tweet. Similar keywords were grouped together to ensure uniformity in analysis. Additionally, missing keywords were predicted using a Recurrent Neural Network (RNN) trained on the data with available keywords, allowing for the completion of the keyword feature across the dataset.
+  - **cleaned_keyword:** This feature involved standardizing and correcting the keywords associated with each tweet. Similar keywords were grouped together, and missing keywords were predicted using a Recurrent Neural Network (RNN) trained on the existing data, ensuring uniformity across the dataset.
   - **has_urls:** A binary feature indicating the presence of URLs in the tweets, as URLs were observed to be a potential indicator of disaster content.
 
 *Example of Data Cleaning:*  
-Before: "Our Deeds are the Reason of this #earthquake May allah forgive us all."  
-After: "deeds reason earthquake may allah forgive us"
+**Before:** "Our Deeds are the Reason of this #earthquake May allah forgive us all."  
+**After:** "deeds reason earthquake may allah forgive us"
 
 ### 2. Exploratory Data Analysis (EDA)
 
@@ -105,39 +105,16 @@ These insights were instrumental in guiding the feature engineering process and 
 - **Recurrent Neural Networks (RNN):** The project utilized RNNs, specifically Long Short-Term Memory (LSTM) networks, chosen for their ability to capture the sequential nature of text data. The LSTM model processes sequences of words in tweets, learning context and differentiating between disaster-related and non-disaster-related content.
 - **Embedding Layer:** To convert the text data into a format suitable for the LSTM model, an embedding layer was employed. This layer transformed the textual input into dense vectors of fixed size, capturing the semantic meaning of the words.
 - **LSTM Layers:** Stacked LSTM layers were used to process the sequences. These layers were designed to retain information from previous words in the sequence, helping the model understand the context and importance of each word within the tweet.
-- **Dense Output Layer:** The final dense layer used a sigmoid activation function to produce a binary output, indicating whether a tweet was disaster-related or not.
+- **Fully Connected Layers:** After the LSTM layers, fully connected layers were added to further refine the learned features and produce the final output.
+- **Output Layer:** A single neuron with a sigmoid activation function was used as the output layer to predict the probability of a tweet being disaster-related (Target = 1) or not (Target = 0).
+- **Model Training:** The model was trained using binary cross-entropy loss and the Adam optimizer, with early stopping implemented to prevent overfitting.
 
-**Model Selection:**  
-- The project focused exclusively on Recurrent Neural Networks (RNN), specifically using Long Short-Term Memory (LSTM) networks. LSTM was chosen due to its ability to capture the sequential nature of the text data, effectively learning the context within each tweet to differentiate between disaster-related and non-disaster-related content.
+### 4. Model Evaluation & Results
 
-**Text Processing:**  
-- **Tokenization and Embedding:** Tweets were tokenized, and each word was embedded into dense vectors via an embedding layer in the LSTM model. This approach bypassed traditional text vectorization methods like TF-IDF, allowing the model to learn the relationships between words in their respective contexts.
-- **Text Cleaning:** Tweets commonly contain various types of text including characters, numbers, special characters, and links. Cleaning all of these is challenging, so the process focused on extracting the characters, as the majority of relevant information is embedded within them.
-
-**Training and Validation:**  
-
-<p align="center">
-  <img src="./assets/images/model_accuracy.png" alt="Model Accuracy" width="45%"/>
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="./assets/images/model_loss.png" alt="Model Loss" width="45%"/>
-</p>
-
-<p align="center"><strong>Model Accuracy and Model Loss</strong></p>
-
-- **Data Splitting:** The dataset was divided into training and validation sets with an 80:20 ratio to ensure the model's performance generalizes well to unseen data.
-- **Training Techniques:** Advanced training techniques were employed, including early stopping to prevent overfitting and model checkpointing to save the best-performing model.
-
-**Model Evaluation:**
-- The LSTM model was evaluated using several performance metrics, including accuracy, precision, recall, and F1-score. The model achieved an accuracy of 86%, indicating a strong ability to classify disaster-related tweets. However, the false negative rate of 17% suggested that there were challenges in identifying all disaster-related tweets, which could be a focus for further model enhancement, such as adjusting the network architecture or experimenting with different hyperparameters.
-
-### 4. Challenges & Limitations
-
-**Challenges:**  
-- **Handling Outliers:** Tweets with unusually long lengths or containing rare words posed challenges. These outliers were handled through pre-processing steps, including truncation to a maximum sequence length and applying text normalization techniques to reduce noise.
-
-**Limitations:**  
-- **Generalization to Other Datasets:** While the model performed well on the given dataset, its ability to generalize to other datasets, particularly those in different languages or cultural contexts, may be limited. Further testing on diverse datasets is necessary to confirm its robustness.
-- **Potential Biases:** The model may have developed biases based on the specific types of disasters or locations frequently mentioned in the training data. For example, if a particular type of disaster (like floods) was overrepresented, the model might be biased towards detecting floods more accurately than other types of disasters.
+**Performance Metrics:**  
+- **Accuracy:** The LSTM model achieved an accuracy of approximately 81% on the validation set.
+- **Precision, Recall, F1-Score:** These metrics were also computed to assess the model's performance across different classes, ensuring that both disaster-related and non-disaster-related tweets were accurately identified.
+- **Confusion Matrix:** A confusion matrix was used to visualize the true positive, true negative, false positive, and false negative predictions, providing insights into the model's classification performance.
 
 ### 5. Conclusion
 
