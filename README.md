@@ -21,13 +21,13 @@ Before diving into the analysis, let's take a look at the dataset that forms the
   - **target:** The classification label, where 1 indicates a disaster-related tweet and 0 indicates a non-disaster-related tweet.
 
 **Sample Data:**
-|   |                                                 text                                                |   keyword    |         location        | target |
-|---|----------------------------------------------------------------------------------------------------|--------------|-------------------------|--------|
-| 1 | Winnipeg police seek witnesses in Arlington and William fatal crash http://t.co/N2bCf4M64V          | fatal        | Winnipeg                |   1    |
-| 2 | Remove the http://t.co/JAb541hHk0 and Linkury Browser Hijacker now! http://t.co/Je6Zjwh5uB          | hijacker     | Fort Collins, CO        |   1    |
-| 3 | A spider has legit just run across my chest. Traumatised. For. Life.                                | traumatised  | Stage with Trey Songz    |   0    |
-| 4 | ok peace I hope I fall off a cliff along with my dignity                                             | cliff%20fall | nyc                     |   1    |
-| 5 | New illustration for the L.A. Times: http://t.co/qYn6KxJSTi #illustration #subway                   | derailed     | Chicago, IL             |   0    |
+| index |                                                 text                                                |   keyword    |         location        | target |
+|-------|-----------------------------------------------------------------------------------------------------|--------------|-------------------------|--------|
+|   1   | Winnipeg police seek witnesses in Arlington and William fatal crash http://t.co/N2bCf4M64V          | fatal        | Winnipeg                |   1    |
+|   2   | Remove the http://t.co/JAb541hHk0 and Linkury Browser Hijacker now! http://t.co/Je6Zjwh5uB          | hijacker     | Fort Collins, CO        |   1    |
+|   3   | A spider has legit just run across my chest. Traumatised. For. Life.                                | traumatised  | Stage with Trey Songz   |   0    |
+|   4   | ok peace I hope I fall off a cliff along with my dignity                                            | cliff%20fall | nyc                     |   1    |
+|   5   | New illustration for the L.A. Times: http://t.co/qYn6KxJSTi #illustration #subway                   | derailed     | Chicago, IL             |   0    |
 
 This dataset provides a rich source of information for developing a robust classification model. The following sections will delve into the exploratory data analysis, data cleaning, feature engineering, and modeling process.
 
@@ -98,33 +98,49 @@ These insights were instrumental in guiding the feature engineering process and 
 After conducting the Exploratory Data Analysis, the next step involved cleaning the data and engineering new features to enhance model performance.
 
 **Data Cleaning:**
-- **Text Cleaning:** The text data underwent a cleaning process that involved extracting the relevant text content, converting it to lowercase, and performing tokenization. Stop words were removed, and lemmatization was applied to standardize the text for analysis.
-- **Keyword Cleaning:** The `keyword` column was cleaned by standardizing and correcting the keywords associated with each tweet. Similar keywords were grouped together, and missing keywords were predicted using a Recurrent Neural Network (RNN) trained on the existing data, ensuring uniformity across the dataset.
+- **Text Cleaning:** The text data underwent a cleaning process that involved removing non-text elements, converting it to lowercase, and performing tokenization. Stop words were removed, and lemmatization was applied to standardize the text for analysis.
+- **Keyword Cleaning:** The keyword column was cleaned by standardizing and correcting the keywords associated with each tweet. Similar keywords were grouped together, and missing keywords were predicted using a Recurrent Neural Network (RNN) trained on the existing data, ensuring uniformity across the dataset.
+
+**Keyword Cleaning Table:**  
+This table provides an example of keywords that were predicted by the RNN and their associated cleaned text and target values.
+| index | cleaned_text                                                                           | predicted_keyword    | target |
+|-------|----------------------------------------------------------------------------------------|----------------------|--------|
+| 0     | deeds reason earthquake may allah forgive us                                           | earthquake           | 1      |
+| 1     | forest fire near la ronge sask canada                                                  | forest_fire          | 1      |
+| 2     | residents ask place notify officer evacuation shelter place order expect               | evacuate             | 1      |
+| 3     | people receive wildfires evacuation order california                                   | evacuate             | 1      |
+| 4     | get send photo ruby alaska smoke wildfires pour school                                 | smoke                | 1      |
+| 5     | rockyfire update california hwy close directions due lake county fire cafire wildfires | evacuate             | 1      |
+| 6     | flood disaster heavy rain cause flash flood streets manitou colorado spring areas      | flood                | 1      |
+| 7     | top hill see fire woods                                                                | fire                 | 1      |
+| 8     | emergency evacuation happen build across street                                        | buildings_burning    | 1      |
+| 9     | afraid tornado come area                                                               | tornado              | 1      |
+
 
 **Feature Engineering:**
-- **cleaned_text:** This feature involved cleaning the original tweet text by removing non-text elements, converting it to lowercase, and applying lemmatization for consistent text analysis.
-- **cleaned_keyword:** This feature involved standardizing and correcting the keywords associated with each tweet. Similar keywords were grouped together, and missing keywords were predicted using a Recurrent Neural Network (RNN) trained on the existing data, ensuring uniformity across the dataset.
-- **has_urls:** A binary feature indicating the presence of URLs in the tweets, as URLs were observed to be a potential indicator of disaster content.
+- **cleaned_text:** This feature represents the cleaned version of the tweet text, with non-alphanumeric characters removed, text converted to lowercase, and stopwords removed. This ensures that the core content of each tweet is captured for analysis.
+- **cleaned_keyword:** The keyword column was processed to standardize the keywords and fill in missing values. The cleaned keywords provide a consistent set of terms for modeling.
+- **has_urls:** This binary feature indicates the presence of URLs in the tweets, providing a simple yet effective way to capture the presence of links, which were found to be correlated with disaster-related content.
 
 *Example of Data Cleaning:*  
 **Before:** "Our Deeds are the Reason of this #earthquake May ALLAH Forgive us all"  
 **After:** "our deeds are the reason of this earthquake may allah forgive us all"
 
-**Feature Engineering:**
+### 4. Model Training and Evaluation
+After completing data preprocessing and feature engineering, the next phase involved training the model and evaluating its performance.
 
-cleaned_text: Cleaned version of the text column, with non-alphanumeric characters removed, text converted to lowercase, and stopwords removed. This feature represents the core content of each tweet, stripped of extraneous elements.
-keyword: The keyword column was processed to handle missing values by predicting missing keywords using a trained model based on the content of the tweets. This ensured that every tweet had an associated keyword, allowing for more consistent analysis.
-has_urls: This binary feature indicates the presence of URLs in the tweets, providing a simple yet effective way to capture the presence of links, which were found to be correlated with disaster-related content.
+**4.1 Model Selection**
+A Recurrent Neural Network (RNN) was chosen for its ability to process sequential data, which is essential when dealing with text data. The model was trained using the cleaned text and keyword features, along with the additional binary feature indicating the presence of URLs. The training process was designed to minimize overfitting by incorporating dropout layers and using an appropriate number of epochs with early stopping.
 
-### 4. Model Development
+**4.2 Model Performance**
+The model's performance was evaluated using various metrics, including accuracy, precision, recall, and F1-score. The model demonstrated robust performance on the validation set, with an accuracy of 82% and an F1-score of 77%. These metrics indicated that the model was well-calibrated to distinguish between disaster-related and non-disaster-related tweets.
 
-**Model Architecture:**
-- **Recurrent Neural Networks (RNN):** The project utilized RNNs, specifically Long Short-Term Memory (LSTM) networks, chosen for their ability to capture the sequential nature of text data. The LSTM model processes sequences of words in tweets, learning context and differentiating between disaster-related and non-disaster-related content.
-- **Embedding Layer:** To convert the text data into a format suitable for the LSTM model, an embedding layer was employed. This layer transformed the textual input into dense vectors of fixed size, capturing the semantic meaning of the words.
-- **LSTM Layers:** Stacked LSTM layers were used to process the sequences. These layers were designed to retain information from previous words in the sequence, helping the model understand the context and importance of each word within the tweet.
-- **Fully Connected Layers:** After the LSTM layers, fully connected layers were added to further refine the learned features and produce the final output.
-- **Output Layer:** A single neuron with a sigmoid activation function was used as the output layer to predict the probability of a tweet being disaster-related (Target = 1) or not (Target = 0).
-- **Model Training:** The model was trained using binary cross-entropy loss and the Adam optimizer, with early stopping implemented to prevent overfitting.
+Example Metrics:
+
+Accuracy: 82%
+Precision: 86%
+Recall: 69%
+F1-Score: 77%
 
 ### 5. Model Evaluation & Results
 
