@@ -127,16 +127,23 @@ This table provides an example of keywords that were predicted by the RNN and th
 **After:** "our deeds are the reason of this earthquake may allah forgive us all"
 
 ### 4. Model Training and Evaluation
-After finalizing the data preparation steps, the model training process was initiated. Given the nature of the text data and the classification task, I opted to use a Recurrent Neural Network (RNN) architecture to capture the sequential patterns in the text data.
+After finalizing the data preparation, the next step was to design and train a model capable of processing the text, keywords, and URLs associated with each tweet. Given the nature of the problem, a deep learning model was employed, leveraging the power of Recurrent Neural Networks (RNN) for handling sequential data.
 
 - **Model Architecture:**
-  - **Embedding Layer:** This layer represents the textual data in a dense vector space.
-  - **RNN Layer:** Processes the sequential data.
-  - **Dense Layer:** A fully connected layer with a sigmoid activation function is used to output the binary classification result.
-- **Training Process:**
-  - **Loss Function:** Binary cross-entropy.
-  - **Optimizer:** Adam optimizer.
-  - **Training & Validation:** The data was split into training and validation sets, allowing the model's performance to be monitored during training.
+  - **Text Input:** The model starts with a text input layer, where the textual data is passed through an Embedding layer. This layer converts the text data into dense vectors of size 128. These vectors are then fed into an LSTM layer with 64 units, which captures the sequential patterns within the text. To prevent overfitting, a Dropout layer with a rate of 0.6 is applied after the LSTM.
+  - **Keyword Input:** The keywords associated with each tweet are processed through a separate input layer. No additional layers were applied to this input, as the keywords were already processed and encoded.
+  - **URL Input:** The presence of URLs in the tweet is represented by a binary input layer.
+  - **Combined Input:** The outputs from the LSTM, keyword input, and URL input layers are concatenated into a single vector, which represents the combined features of the tweet.
+  - **Dense Layer:** The concatenated vector is passed through a Dense layer with 64 units and a tanh activation function, which introduces non-linearity into the model.
+  - **Output Layer:** Finally, the output layer consists of a single neuron with a sigmoid activation function, producing the probability of the tweet belonging to the target class.
+
+- **Model Compilation and Training:**
+  - **Loss Function:** The model was compiled using the binary cross-entropy loss function, which is suitable for binary classification tasks.
+  - **Optimizer:** The Adam optimizer was selected for its efficiency in training deep learning models.
+  - **Early Stopping:** To prevent overfitting and ensure the best model is retained, Early Stopping was implemented, monitoring the validation loss. If the validation loss did not improve for three consecutive epochs by a minimum of 0.01, training was halted, and the model with the best performance was restored.
+  - **Model Checkpointing:** Additionally, the ModelCheckpoint callback was used to save the model weights corresponding to the best validation loss during training.
+
+The model was trained over 100 epochs with a batch size of 128, using the training and validation datasets. The training process was enhanced by the use of Early Stopping and Model Checkpointing, which ensured that the model generalizes well to unseen data.
  
 <p align="center">
   <img src="./assets/images/model_accuracy.png" alt="Model Accuracy" width="45%"/>
@@ -146,11 +153,27 @@ After finalizing the data preparation steps, the model training process was init
 <p align="center">Model Accuracy and Loss</p>
 
 ### 5. Model Evaluation & Results
+The model's performance was assessed on both the training and validation datasets to understand its effectiveness in predicting disaster-related tweets.
 
-**Performance Metrics:**  
-- **Accuracy:** The LSTM model achieved an accuracy of approximately 81% on the validation set.
-- **Precision, Recall, F1-Score:** These metrics were also computed to assess the model's performance across different classes, ensuring that both disaster-related and non-disaster-related tweets were accurately identified.
-- **Confusion Matrix:** A confusion matrix was used to visualize the true positive, true negative, false positive, and false negative predictions, providing insights into the model's classification performance.
+**Results:**
+- **Training Set:**
+  - **Accuracy:** 88%
+  - **F1-Score:** 87%
+  - **Precision:** 88%
+  - **Recall:** 86%
+- **Validation Set:**
+  - **Accuracy:** 82%
+  - **F1-Score:** 82%
+  - **Precision:** 83%
+  - **Recall:** 82%
+
+Visual Marker: Insert confusion matrix plots here.
+
+**Analysis:**
+- **Overall Performance:** The model demonstrates solid performance with an accuracy of 82% on the validation set, which suggests it generalizes well to unseen data. However, there is a noticeable drop from the training set's performance, indicating some overfitting.
+- **Disaster-Related Prediction:** The F1-Score of 82% on the validation set shows a good balance between precision and recall, but there’s room for improvement, particularly in reducing false negatives, which is critical in disaster contexts. The relatively lower recall on the validation set suggests that the model misses some disaster-related tweets, which could be detrimental in real-world scenarios.
+
+Visual Marker: Insert classification report tables here.
 
 ### 6. Conclusion
 
