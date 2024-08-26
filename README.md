@@ -39,14 +39,14 @@ The EDA phase involved a comprehensive analysis of the dataset to uncover patter
 <p align="center">
   <img src="./assets/images/wordcloud_keywords.png" alt="Word Cloud for Keywords"/>
 </p>
-<p align="center"><strong>Word Cloud for Keywords</strong></p>
+<p align="center">Word Cloud for Keywords</p>
 
 - **Keywords:** A word cloud was generated from the `keyword` column to identify the most common keywords associated with disaster-related tweets. This visualization highlighted terms such as "hostage," "derailment," "flood," "forest fire," and "typhoon." The size of each word in the cloud represents its frequency, with larger words indicating more common keywords in the dataset. This visualization emphasized the variety and prevalence of different disaster types discussed in the tweets, providing a visual representation of the critical themes identified during data exploration.
 
 <p align="center">
   <img src="./assets/images/wordcloud_locations.png" alt="Word Cloud for Locations"/>
 </p>
-<p align="center"><strong>Word Cloud for Locations</strong></p>
+<p align="center">Word Cloud for Locations</p>
 
 - **Locations:** Another word cloud was created from the `location` column, showcasing the geographical areas most mentioned in disaster-related tweets. Locations like "California", "Texas", and "New York" were prominently featured, indicating areas frequently impacted by the reported events.
   Key observations from the location word cloud:
@@ -58,7 +58,7 @@ The EDA phase involved a comprehensive analysis of the dataset to uncover patter
 <p align="center">
   <img src="./assets/images/wordcloud_texts.png" alt="Word Cloud for Texts"/>
 </p>
-<p align="center"><strong>Word Cloud for Texts</strong></p>
+<p align="center">Word Cloud for Texts</p>
 
 - **Text:** A word cloud was created from the `text` column to analyze the most frequently occurring words in disaster-related tweets. Interestingly, the most prominent term is "t.co," which appears frequently due to the inclusion of links in tweets. Other significant words include "fire," "people," "suicide," "flood," "police," and "killed," reflecting the critical themes discussed in the dataset. The presence of terms like "Hiroshima," "storm," and "crash" highlights specific disasters and incidents that were heavily discussed. Additionally, words like "via," "amp," and "new" show up frequently, possibly indicating common tweet structures and phrasing.
 
@@ -67,14 +67,14 @@ The EDA phase involved a comprehensive analysis of the dataset to uncover patter
 <p align="center">
   <img src="./assets/images/keyword_distribution_by_target_top10.png" alt="Keyword Distribution - Top 10"/>
 </p>
-<p align="center"><strong>Keyword Distribution - Top 10</strong></p>
+<p align="center">Keyword Distribution - Top 10</p>
  
 - **Top 10 Keywords:** The top 10 keywords predominantly associated with disaster-related tweets (Target == 1) include "derailment," "wreckage," "outbreak," "debris," and "oil spill." These terms highlight the most frequently discussed disaster events in the dataset, with a strong focus on incidents involving significant damage or threat.
 
 <p align="center">
   <img src="./assets/images/keyword_distribution_by_target_least10.png" alt="Keyword Distribution - Least 10"/>
 </p>
-<p align="center"><strong>Keyword Distribution - Least 10</strong></p>
+<p align="center">Keyword Distribution - Least 10</p>
 
 - **Least 10 Keywords:** The least mentioned keywords in disaster-related tweets (Target == 1) include "blew up," "threat," "screaming," and "electrocute." These terms, while still relevant to disaster contexts, appear far less frequently in the dataset, indicating they are less commonly associated with major disaster events compared to the top keywords.
 
@@ -83,7 +83,7 @@ The EDA phase involved a comprehensive analysis of the dataset to uncover patter
 <p align="center">
   <img src="./assets/images/link_target_bar_chart.png" alt="Correlation of Links and Target"/>
 </p>
-<p align="center"><strong>Correlation of Links and Target</strong></p>
+<p align="center">Correlation of Links and Target</p>
 
 - **URLs and Disaster Relevance:** The bar chart illustrates the correlation between the presence of URLs in tweets (`has_urls`) and their relevance to disaster-related content (`target`). The data shows that tweets containing URLs (True) are more likely to be classified as relevant to disasters (Target == 1) compared to those without URLs (False). Specifically, there are 2,172 disaster-related tweets with URLs compared to 1,799 non-disaster-related tweets. In contrast, tweets without URLs are predominantly non-disaster-related, with 2,543 such tweets compared to 1,099 disaster-related tweets. This suggests that disaster-related tweets often include URLs, possibly linking to news articles, videos, or other resources related to the event being discussed.
 
@@ -127,20 +127,23 @@ This table provides an example of keywords that were predicted by the RNN and th
 **After:** "our deeds are the reason of this earthquake may allah forgive us all"
 
 ### 4. Model Training and Evaluation
-After completing data preprocessing and feature engineering, the next phase involved training the model and evaluating its performance.
+After finalizing the data preparation steps, the model training process was initiated. Given the nature of the text data and the classification task, I opted to use a Recurrent Neural Network (RNN) architecture to capture the sequential patterns in the text data.
 
-**4.1 Model Selection**
-A Recurrent Neural Network (RNN) was chosen for its ability to process sequential data, which is essential when dealing with text data. The model was trained using the cleaned text and keyword features, along with the additional binary feature indicating the presence of URLs. The training process was designed to minimize overfitting by incorporating dropout layers and using an appropriate number of epochs with early stopping.
-
-**4.2 Model Performance**
-The model's performance was evaluated using various metrics, including accuracy, precision, recall, and F1-score. The model demonstrated robust performance on the validation set, with an accuracy of 82% and an F1-score of 77%. These metrics indicated that the model was well-calibrated to distinguish between disaster-related and non-disaster-related tweets.
-
-Example Metrics:
-
-Accuracy: 82%
-Precision: 86%
-Recall: 69%
-F1-Score: 77%
+- **Model Architecture:**
+  - **Embedding Layer:** This layer represents the textual data in a dense vector space.
+  - **RNN Layer:** Processes the sequential data.
+  - **Dense Layer:** A fully connected layer with a sigmoid activation function is used to output the binary classification result.
+- **Training Process:**
+  - **Loss Function:** Binary cross-entropy.
+  - **Optimizer:** Adam optimizer.
+  - **Training & Validation:** The data was split into training and validation sets, allowing the model's performance to be monitored during training.
+ 
+<p align="center">
+  <img src="./assets/images/model_accuracy.png" alt="Model Accuracy" width="45%"/>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="./assets/images/model_loss.png" alt="Model Loss" width="45%"/>
+</p>
+<p align="center">Model Accuracy and Loss</p>
 
 ### 5. Model Evaluation & Results
 
