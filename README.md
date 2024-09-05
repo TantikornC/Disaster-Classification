@@ -23,11 +23,11 @@ Before diving into the analysis, let's take a look at the dataset that forms the
 **Sample Data:**
 | index |                                                 text                                                |   keyword    |         location        | target |
 |-------|-----------------------------------------------------------------------------------------------------|--------------|-------------------------|--------|
-|   1   | Winnipeg police seek witnesses in Arlington and William fatal crash http://t.co/N2bCf4M64V          | fatal        | Winnipeg                |   1    |
-|   2   | Remove the http://t.co/JAb541hHk0 and Linkury Browser Hijacker now! http://t.co/Je6Zjwh5uB          | hijacker     | Fort Collins, CO        |   1    |
-|   3   | A spider has legit just run across my chest. Traumatised. For. Life.                                | traumatised  | Stage with Trey Songz   |   0    |
-|   4   | ok peace I hope I fall off a cliff along with my dignity                                            | cliff%20fall | nyc                     |   1    |
-|   5   | New illustration for the L.A. Times: http://t.co/qYn6KxJSTi #illustration #subway                   | derailed     | Chicago, IL             |   0    |
+|   0   | Winnipeg police seek witnesses in Arlington and William fatal crash http://t.co/N2bCf4M64V          | fatal        | Winnipeg                |   1    |
+|   1   | Remove the http://t.co/JAb541hHk0 and Linkury Browser Hijacker now! http://t.co/Je6Zjwh5uB          | hijacker     | Fort Collins, CO        |   1    |
+|   2   | A spider has legit just run across my chest. Traumatised. For. Life.                                | traumatised  | Stage with Trey Songz   |   0    |
+|   3   | ok peace I hope I fall off a cliff along with my dignity                                            | cliff%20fall | nyc                     |   1    |
+|   4   | New illustration for the L.A. Times: http://t.co/qYn6KxJSTi #illustration #subway                   | derailed     | Chicago, IL             |   0    |
 
 This dataset provides a rich source of information for developing a robust classification model. The following sections will delve into the exploratory data analysis, data cleaning, feature engineering, and modeling process.
 
@@ -156,22 +156,23 @@ The model was trained over 100 epochs with a batch size of 128, using the traini
 The model's performance was assessed on both the training and validation datasets to understand its effectiveness in predicting disaster-related tweets.
 
 **Results:**
-- **Training Set:**
-  - **Accuracy:** 88%
-  - **F1-Score:** 87%
-  - **Precision:** 88%
-  - **Recall:** 86%
-- **Validation Set:**
-  - **Accuracy:** 82%
-  - **F1-Score:** 82%
-  - **Precision:** 83%
-  - **Recall:** 82%
+| Evaluation Metrics | Training Set | Validation Set |
+| ------------------ | ------------ | -------------- |
+| Accuracy (%)       | 88           | 82             |
+| F1-Score (%)       | 84           | 77             |
+| Precision (%)      | 92           | 84             |
+| Recall (%)         | 78           | 70             |
 
-Visual Marker: Insert confusion matrix plots here.
+<p align="center">
+  <img src="./assets/images/confusion_matrix_training.png" alt="Confusion Matrix (training)" width="45%"/>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="./assets/images/confusion_matrix_validation.png" alt="Confusion Matrix (validation)" width="45%"/>
+</p>
+<p align="center">Confusion Matrices of Training and Validation Dataset</p>
 
 **Analysis:**
-- **Overall Performance:** The model demonstrates solid performance with an accuracy of 82% on the validation set, which suggests it generalizes well to unseen data. However, there is a noticeable drop from the training set's performance, indicating some overfitting.
-- **Disaster-Related Prediction:** The F1-Score of 82% on the validation set shows a good balance between precision and recall, but there’s room for improvement, particularly in reducing false negatives, which is critical in disaster contexts. The relatively lower recall on the validation set suggests that the model misses some disaster-related tweets, which could be detrimental in real-world scenarios.
+- **Overall Performance:** The model demonstrates solid performance with an accuracy of 88% on the validation set, which suggests it generalizes well to unseen data. However, there is a noticeable drop from the training set's performance, indicating some overfitting.
+- **Disaster-Related Prediction:** The F1-Score of 77% on the validation set shows a good balance between precision and recall, but there’s room for improvement, particularly in reducing false negatives, which is critical in disaster contexts. The relatively lower recall on the validation set suggests that the model misses some disaster-related tweets, which could be detrimental in real-world scenarios.
 
 Visual Marker: Insert classification report tables here.
 
