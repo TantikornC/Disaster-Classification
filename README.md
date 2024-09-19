@@ -118,7 +118,7 @@ This table provides an example of keywords that were predicted by the RNN and th
 
 
 **Feature Engineering:**
-- **cleaned_text:** This feature represents the cleaned version of the tweet text, with non-alphanumeric characters removed, text converted to lowercase, and stopwords removed. This ensures that the core content of each tweet is captured for analysis.
+- **cleaned_text:** This feature represents the cleaned version of the tweet text, with non-alphabet characters removed, text converted to lowercase, and stopwords removed. This ensures that the core content of each tweet is captured for analysis.
 - **cleaned_keyword:** The keyword column was processed to standardize the keywords and fill in missing values. The cleaned keywords provide a consistent set of terms for modeling.
 - **has_urls:** This binary feature indicates the presence of URLs in the tweets, providing a simple yet effective way to capture the presence of links, which were found to be correlated with disaster-related content.
 
@@ -171,10 +171,8 @@ The model's performance was assessed on both the training and validation dataset
 <p align="center">Confusion Matrices of Training and Validation Dataset</p>
 
 **Analysis:**
-- **Overall Performance:** The model demonstrates solid performance with an accuracy of 88% on the validation set, which suggests it generalizes well to unseen data. However, there is a noticeable drop from the training set's performance, indicating some overfitting.
-- **Disaster-Related Prediction:** The F1-Score of 77% on the validation set shows a good balance between precision and recall, but there’s room for improvement, particularly in reducing false negatives, which is critical in disaster contexts. The relatively lower recall on the validation set suggests that the model misses some disaster-related tweets, which could be detrimental in real-world scenarios.
-
-Visual Marker: Insert classification report tables here.
+- **Overall Performance:** The model demonstrates solid performance with an accuracy of 82% on the validation set, which suggests it generalizes well to unseen data. However, there is a noticeable drop from the training set's performance, indicating some overfitting.
+- **Disaster-Related Prediction:** The F1-Score of 77% on the validation set shows a good balance between precision and recall, but there’s room for improvement, particularly in reducing false negatives, which is critical in disaster contexts. The relatively lower recall on the validation set suggests that the model misses some disaster-related tweets, which could be fatal in real-world scenarios.
 
 ### 6. Conclusion
 
@@ -182,7 +180,7 @@ Visual Marker: Insert classification report tables here.
 - The project demonstrated that machine learning models, when combined with effective feature engineering and evaluation techniques, can accurately classify disaster-related tweets. The insights gained from this classification can significantly aid in disaster response efforts.
 
 **Impact:**
-- This model has the potential to make a substantial impact on disaster management by providing timely, relevant information to authorities and the public, ultimately contributing to more effective and efficient disaster response and mitigation efforts.
+- This model has the potential to make a significant impact on disaster management by providing timely, relevant information to authorities and the public, ultimately contributing to more effective and efficient disaster response and mitigation efforts.
 
 
 ## Acknowledgements
