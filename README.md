@@ -48,10 +48,10 @@ The EDA phase involved a comprehensive analysis of the dataset to uncover patter
 </p>
 <p align="center">Word Cloud for Locations</p>
 
-- **Locations:** Another word cloud was created from the `location` column, showcasing the geographical areas most mentioned in disaster-related tweets. Locations like "California", "Texas", and "New York" were prominently featured, indicating areas frequently impacted by the reported events.
+- **Locations:** Another word cloud was created from the `location` column, showcasing the geographical areas most mentioned in disaster-related tweets. Locations like "USA", "New York", and "Canada" were prominently featured, indicating areas frequently impacted by the reported events.
   Key observations from the location word cloud:
-  - **Prominent Locations:** The most frequently mentioned locations include "USA," "New York," "Canada," "UK," and "Nigeria," indicating high tweet activity related to disasters in these areas.
-  - **Global Coverage:** The word cloud shows a wide geographic spread, including locations from various continents such as "Australia," "India," "London," and "California."
+  - **Prominent Locations:** The most frequently mentioned locations include "USA", "New York", "Canada", "UK", and "Nigeria" indicating high tweet activity related to disasters in these areas.
+  - **Global Coverage:** The word cloud shows a wide geographic spread, including locations from various continents such as "Australia", "India", "London", and "California".
   - **Significant Cities and Countries:** Both country names (e.g., "USA," "Canada") and city names (e.g., "New York," "London") appear frequently, highlighting the urban centers often discussed in the context of disasters.
   - **Diverse Mention:** The locations range from specific cities and states to broader regions and countries, reflecting the diverse scope of the dataset in terms of geographic mentions.
 
