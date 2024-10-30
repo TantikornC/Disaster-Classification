@@ -41,7 +41,7 @@ The EDA phase involved a comprehensive analysis of the dataset to uncover patter
 </p>
 <p align="center">Word Cloud for Keywords</p>
 
-- **Keywords:** A word cloud was generated from the `keyword` column to identify the most common keywords associated with disaster-related tweets. This visualization highlighted terms such as "hostage," "derailment," "flood," "forest fire," and "typhoon." The size of each word in the cloud represents its frequency, with larger words indicating more common keywords in the dataset. This visualization emphasized the variety and prevalence of different disaster types discussed in the tweets, providing a visual representation of the critical themes identified during data exploration.
+- **Keywords:** A word cloud was generated from the `keyword` column to identify the most common keywords associated with disaster-related tweets. This visualization highlighted terms such as "hostage", "derailment", "flood", "forest fire", and "typhoon". The size of each word in the cloud represents its frequency, with larger words indicating more common keywords in the dataset. This visualization emphasized the variety and prevalence of different disaster types discussed in the tweets, providing a visual representation of the critical themes identified during data exploration.
 
 <p align="center">
   <img src="./assets/images/wordcloud_locations.png" alt="Word Cloud for Locations"/>
@@ -52,7 +52,7 @@ The EDA phase involved a comprehensive analysis of the dataset to uncover patter
   Key observations from the location word cloud:
   - **Prominent Locations:** The most frequently mentioned locations include "USA", "New York", "Canada", "UK", and "Nigeria" indicating high tweet activity related to disasters in these areas.
   - **Global Coverage:** The word cloud shows a wide geographic spread, including locations from various continents such as "Australia", "India", "London", and "California".
-  - **Significant Cities and Countries:** Both country names (e.g., "USA," "Canada") and city names (e.g., "New York," "London") appear frequently, highlighting the urban centers often discussed in the context of disasters.
+  - **Significant Cities and Countries:** Both country names (e.g., "USA", "Canada") and city names (e.g., "New York", "London") appear frequently, highlighting the urban centers often discussed in the context of disasters.
   - **Diverse Mention:** The locations range from specific cities and states to broader regions and countries, reflecting the diverse scope of the dataset in terms of geographic mentions.
 
 <p align="center">
@@ -60,7 +60,7 @@ The EDA phase involved a comprehensive analysis of the dataset to uncover patter
 </p>
 <p align="center">Word Cloud for Texts</p>
 
-- **Text:** A word cloud was created from the `text` column to analyze the most frequently occurring words in disaster-related tweets. Interestingly, the most prominent term is "t.co," which appears frequently due to the inclusion of links in tweets. Other significant words include "fire," "people," "suicide," "flood," "police," and "killed," reflecting the critical themes discussed in the dataset. The presence of terms like "Hiroshima," "storm," and "crash" highlights specific disasters and incidents that were heavily discussed. Additionally, words like "via," "amp," and "new" show up frequently, possibly indicating common tweet structures and phrasing.
+- **Text:** A word cloud was created from the `text` column to analyze the most frequently occurring words in disaster-related tweets. Interestingly, the most prominent term is "t.co," which appears frequently due to the inclusion of links in tweets. Other significant words include "fire", "people", "suicide", "flood", "police", and "killed", reflecting the critical themes discussed in the dataset. The presence of terms like "Hiroshima", "storm", and "crash" highlights specific disasters and incidents that were heavily discussed. Additionally, words like "via", "amp", and "new" show up frequently, possibly indicating common tweet structures and phrasing.
 
 **Keyword Distribution by Target:** 
 
@@ -87,7 +87,7 @@ The EDA phase involved a comprehensive analysis of the dataset to uncover patter
 
 - **URLs and Disaster Relevance:** The bar chart illustrates the correlation between the presence of URLs in tweets (`has_urls`) and their relevance to disaster-related content (`target`). The data shows that tweets containing URLs (True) are more likely to be classified as relevant to disasters (Target == 1) compared to those without URLs (False). Specifically, there are 2,172 disaster-related tweets with URLs compared to 1,799 non-disaster-related tweets. In contrast, tweets without URLs are predominantly non-disaster-related, with 2,543 such tweets compared to 1,099 disaster-related tweets. This suggests that disaster-related tweets often include URLs, possibly linking to news articles, videos, or other resources related to the event being discussed.
 
-These insights were instrumental in guiding the feature engineering process and refining the overall model strategy. By thoroughly understanding the data's distribution, language patterns, and contextual nuances, the team was able to make informed decisions that significantly enhanced the model's predictive capabilities.
+These insights were instrumental in guiding the feature engineering process and refining the overall model strategy. By thoroughly understanding the data's distribution, language patterns, and contextual differences, the team was able to make informed decisions that significantly enhanced the model's predictive capabilities.
 
 ### 3. Data Cleaning & Feature Engineering
 After conducting the Exploratory Data Analysis, the next step involved cleaning the data and engineering new features to enhance model performance.
@@ -95,6 +95,7 @@ After conducting the Exploratory Data Analysis, the next step involved cleaning 
 **Data Cleaning:**
 - **Text Cleaning:** The text data underwent a cleaning process that involved removing non-text elements, converting it to lowercase, and performing tokenization. Stop words were removed, and lemmatization was applied to standardize the text for analysis.
 - **Keyword Cleaning:** The keyword column was cleaned by standardizing and correcting the keywords associated with each tweet. Similar keywords were grouped together, and missing keywords were predicted using a Recurrent Neural Network (RNN) trained on the existing data, ensuring uniformity across the dataset.
+- **Location Cleaning:** The location column was removed because of the diversity in the data.
 
 **Keyword Cleaning Table:**  
 This table provides an example of keywords that were predicted by the RNN and their associated cleaned text and target values.
@@ -116,10 +117,6 @@ This table provides an example of keywords that were predicted by the RNN and th
 - **cleaned_text:** This feature represents the cleaned version of the tweet text, with non-alphabet characters removed, text converted to lowercase, and stopwords removed. This ensures that the core content of each tweet is captured for analysis.
 - **cleaned_keyword:** The keyword column was processed to standardize the keywords and fill in missing values. The cleaned keywords provide a consistent set of terms for modeling.
 - **has_urls:** This binary feature indicates the presence of URLs in the tweets, providing a simple yet effective way to capture the presence of links, which were found to be correlated with disaster-related content.
-
-*Example of Data Cleaning:*  
-**Before:** "Our Deeds are the Reason of this #earthquake May ALLAH Forgive us all"  
-**After:** "our deeds are the reason of this earthquake may allah forgive us all"
 
 ### 4. Model Training and Evaluation
 After finalizing the data preparation, the next step was to design and train a model capable of processing the text, keywords, and URLs associated with each tweet. Given the nature of the problem, a deep learning model was employed, leveraging the power of Recurrent Neural Networks (RNN) for handling sequential data.
